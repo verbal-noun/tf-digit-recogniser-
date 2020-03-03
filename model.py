@@ -65,3 +65,7 @@ layer_fc1 = tf.nn.relu(tf.matmul(flatten_pool2, wfc1) + bfc1)
 
 wfc2 = weight_variable([1024, 10])
 bfc2 = bias_variable([10])y_conv = tf.matmul(layer_fc1, wfc2) + bfc2
+
+init = tf.global_variables_initializer()
+session = tf.Session()
+session.run(init)
