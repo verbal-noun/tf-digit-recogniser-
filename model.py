@@ -62,3 +62,6 @@ layer_pool2 = max_pool_2x2(layer_conv2)
 wfc1 = weight_variable([7*7*64, 1024])
 bfc1 = bias_variable([1024])flatten_pool2 = tf.reshape(layer_pool2, [-1,7*7*64])
 layer_fc1 = tf.nn.relu(tf.matmul(flatten_pool2, wfc1) + bfc1)
+
+wfc2 = weight_variable([1024, 10])
+bfc2 = bias_variable([10])y_conv = tf.matmul(layer_fc1, wfc2) + bfc2
