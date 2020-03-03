@@ -16,3 +16,10 @@ FC_NEURONS = 1024     # Number of neurons in the fully
                       # connected later
 LR = 0.001            # Learning rate Alpha for SGD
 
+labels = np.array(mnist.pop('label'))
+labels = LabelEncoder().fit_transform(labels)[:, None]
+labels = OneHotEncoder().fit_transform(labels).todense()
+mnist = StandardScaler().fit_transform(np.float32(mnist.values))
+mnist = mnist.reshape(-1, IMAGE_WIDTH, IMAGE_WIDTH, COLOR_CHANNELS)
+train_data, valid_data = mnist[:-VALID_SIZE], mnist[-VALID_SIZE:]
+train_labels, valid_labels = labels[:-VALID_SIZE], labels[-VALID_SIZE:]
