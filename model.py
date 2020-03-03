@@ -23,3 +23,6 @@ mnist = StandardScaler().fit_transform(np.float32(mnist.values))
 mnist = mnist.reshape(-1, IMAGE_WIDTH, IMAGE_WIDTH, COLOR_CHANNELS)
 train_data, valid_data = mnist[:-VALID_SIZE], mnist[-VALID_SIZE:]
 train_labels, valid_labels = labels[:-VALID_SIZE], labels[-VALID_SIZE:]
+
+tf_data = tf.placeholder(tf.float32, shape=(None, WIDTH, WIDTH, CHANNELS))
+tf_labels = tf.placeholder(tf.float32, shape=(None, LABELS))
