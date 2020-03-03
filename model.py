@@ -48,11 +48,17 @@ def max_pool_2x2(x):
 # First convolution layer - maps one grayscale image to 8 feature maps.
 w1 = weight_variable([5, 5, 1, 32])
 b1 = bias_variable([32])
-layer_conv1 = tf.nn.relu(conv_2d(x, w1) + b1)# Pooling layer - downsamples by 2X.
+# Pooling layer - downsamples by 2X.
+layer_conv1 = tf.nn.relu(conv_2d(x, w1) + b1)
 layer_pool1 = max_pool_2x2(layer_conv1)
 
 # Second convolutional layer -- maps 32 feature maps to 64.
 w2 = weight_variable([5, 5, 32, 64])
 b2 = bias_variable([64])
-layer_conv2 = tf.nn.relu(conv_2d(layer_pool1, w2) + b2)# Second pooling layer.
+# Second pooling layer.
+layer_conv2 = tf.nn.relu(conv_2d(layer_pool1, w2) + b2)
 layer_pool2 = max_pool_2x2(layer_conv2)
+
+wfc1 = weight_variable([7*7*64, 1024])
+bfc1 = bias_variable([1024])flatten_pool2 = tf.reshape(layer_pool2, [-1,7*7*64])
+layer_fc1 = tf.nn.relu(tf.matmul(flatten_pool2, wfc1) + bfc1)
